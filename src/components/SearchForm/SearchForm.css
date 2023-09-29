@@ -1,0 +1,131 @@
+.search {
+  margin: 0;
+  width: calc((1140/1280)*100%);
+  padding: 80px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.search__form {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 39px;
+  border-bottom: 1px solid rgba(66, 66, 66, 1);
+}
+
+.search__line {
+  margin: 0;
+  padding-bottom: 28px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.search__input {
+  color: #FFF;
+  margin: 0 10px 0 0;
+  padding: 16px 0 16px 20px;
+  display: block;
+  width: 100%;
+  background-color: rgba(47, 47, 47, 1);
+  border-radius: 8px;
+  box-sizing: border-box;
+  border: 0;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.search__button {
+  padding: 0;
+  border: 0;
+  height: 44px;
+  max-width: 44px;
+  width: 100%;
+  background-image: url(../../images/find.svg);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.search__filter {
+  margin: 0;
+  display: flex;
+}
+
+.search__filter-subtitle {
+  margin: 0;
+  padding-left: 12px;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.search__filter-span {
+  width: 36px;
+  height: 20px;
+}
+
+.search__filter-checkbox {
+  position: absolute;
+  width: 36px;
+  height: 20px;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  opacity: 0%;
+  cursor: pointer;
+}
+
+.search__filter-checkbox+.search__filter-span {
+  width: 36px;
+  height: 20px;
+  background-image: url(../../images/smalltumboff.svg);
+  object-fit: contain;
+  background-color: transparent;
+}
+
+.search__filter-checkbox:checked+.search__filter-span {
+  width: 36px;
+  height: 20px;
+  background-image: url(../../images/smalltumb.svg);
+  object-fit: contain;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    width: calc((708/768)*100%);
+  }
+
+  .search__line {
+    padding-bottom: 41px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search {
+    width: calc((292/320)*100%);
+  }
+
+  .search__input {
+    padding: 13px 0 13px 13px;
+  }
+
+  .search__line {
+    padding-bottom: 46px;
+  }
+
+  .search__filter-subtitle {
+    font-size: 11px;
+  }
+}
