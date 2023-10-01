@@ -8,21 +8,21 @@ function Header({ isLoggedIn }) {
 
   return (
 
-    <section className="header">
+    <header className={`header ${isLoggedIn ? "header_signedin" : ""}`}>
       <Link className="header__logo" to="/"></Link>
-      <nav className="header__nav">
+      <nav className={`header__nav ${isLoggedIn ? "header__nav_signedin" : ""}`} >
         {isLoggedIn ?
           <>
             <NavLink className={({ isActive }) => `header__link header__link_signedin ${isActive ? "header__link_selected" : ""}`} to="/movies">Фильмы</NavLink>
             <NavLink className={({ isActive }) => `header__link header__link_signedin ${isActive ? "header__link_selected" : ""}`} to="/saved-movies">Сохранённые фильмы</NavLink>
 
-            <button className={`header__burger-button ${open ? 'header__burger-button_type_close' : 'header__burger-button_type_open'}`} onClick={() => { setOpen(!open) }}></button>
+            <button className={`header__burger-button ${open ? 'header__burger-button_type_close' : 'header__burger-button_type_open'}`} onClick={() => { setOpen(!open) }} type="button" ></button>
             <div className={`header__overlay ${open ? 'header__overlay_open' : ''}`}></div>
             <div className={`header__menu ${open ? 'header__menu_open' : ''}`}>
               <NavLink className={({ isActive }) => `header__menu-link ${isActive ? "header__menu-link_selected" : ""}`} to="/">Главная</NavLink>
               <NavLink className={({ isActive }) => `header__menu-link ${isActive ? "header__menu-link_selected" : ""}`} to="/movies">Фильмы</NavLink>
               <NavLink className={({ isActive }) => `header__menu-link ${isActive ? "header__menu-link_selected" : ""}`} to="/saved-movies">Сохранённые фильмы</NavLink>
-              {isLoggedIn && <NavLink className="header___menu-link header___menu-link_style_light-grey" to="/profile">Аккаунт</NavLink>}
+              {isLoggedIn && <NavLink className="header__menu-link header__menu-link_style_light-grey" to="/profile">Аккаунт</NavLink>}
             </div>
           </> :
           <>
@@ -32,7 +32,7 @@ function Header({ isLoggedIn }) {
       </nav>
       {isLoggedIn && <NavLink className="header__link header__link_signedin header__link_style_light-grey" to="/profile">Аккаунт</NavLink>}
 
-    </section>
+    </header>
 
 
   );

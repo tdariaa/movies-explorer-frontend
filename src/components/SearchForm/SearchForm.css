@@ -27,6 +27,10 @@
   align-items: center;
 }
 
+.search__input:focus {
+  outline: 1px solid #ffffff50;
+}
+
 .search__input {
   color: #FFF;
   margin: 0 10px 0 0;
@@ -38,11 +42,12 @@
   box-sizing: border-box;
   border: 0;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
+  outline: none;
 }
 
 .search__button {
@@ -56,6 +61,10 @@
   cursor: pointer;
 }
 
+.search__button:hover {
+  opacity: 0.8;
+}
+
 .search__filter {
   margin: 0;
   display: flex;
@@ -64,7 +73,7 @@
 .search__filter-subtitle {
   margin: 0;
   padding-left: 12px;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -101,6 +110,7 @@
   object-fit: contain;
   background-color: transparent;
 }
+
 
 @media screen and (max-width: 768px) {
   .search {

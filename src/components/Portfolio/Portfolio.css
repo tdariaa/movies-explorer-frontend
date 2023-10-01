@@ -1,4 +1,4 @@
-.student_subtitle {
+.student__subtitle {
   padding: 0 0 50px 0;
   margin: 0;
   color: #8B8B8B;
@@ -9,7 +9,7 @@
   line-height: 20px;
 }
 
-.student_portfolio {
+.student__portfolio {
   margin: 0;
   padding: 0 0 125px 0;
   width: 100%;
@@ -50,26 +50,38 @@
 }
 
 @media screen and (max-width: 768px) {
-  .student_portfolio {
+  .student__portfolio {
     font-size: 28px;
     letter-spacing: -1.12px;
     padding-bottom: 91px;
   }
+
+  .student__text {
+    font-size: 28px;
+    line-height: 50px;
+    letter-spacing: -1.12px;
+  }
 }
 
 @media screen and (max-width: 600px) {
-  .student_subtitle {
+  .student__subtitle {
     padding: 0 0 40px 0;
     color: #A0A0A0;
     font-size: 14px;
     line-height: 20px;
   }
 
-  .student_portfolio {
+  .student__portfolio {
     font-size: 18px;
     line-height: 28px;
     letter-spacing: -0.72px;
     padding-bottom: 70px;
+  }
+
+  .student__text {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
   }
 
 }

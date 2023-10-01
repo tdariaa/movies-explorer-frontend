@@ -9,20 +9,20 @@ function Authentication(props) {
   }
 
   return (
+    <main className="auth">
+      <section className="auth__section">
+        <Link className="auth__logo" to="/"></Link>
+        <h1 className="auth__title">{props.title}</h1>
+        <form className="auth__form" onSubmit={(e) => { e.preventDefault(); handleSubmit() }} noValidate>
+          <div className="auth__inputs" >
+            {props.children}
+          </div>
+          <button className={`auth__button ${props.isDisabled ? 'auth__button_disabled' : ''}`} disabled={props.isDisabled} type="submit">{props.buttonTitle}</button>
+        </form>
 
-    <section className="auth">
-      <Link className="auth__logo" to="/"></Link>
-      <h1 className="auth__title">{props.title}</h1>
-      <form className="auth__form" onSubmit={(e) => { e.preventDefault(); handleSubmit() }} noValidate>
-        <div className="auth__inputs" >
-          {props.children}
-        </div>
-        <button className={`auth__button ${props.isDisabled ? 'auth__button_disabled' : ''}`} disabled={props.isDisabled}>{props.buttonTitle}</button>
-      </form>
-
-      <p className="auth__text">{props.text} <Link className="auth__link" to={props.link}>{props.linkText}</Link></p>
-    </section>
-
+        <p className="auth__text">{props.text} <Link className="auth__link" to={props.link}>{props.linkText}</Link></p>
+      </section>
+    </main>
 
 
   );

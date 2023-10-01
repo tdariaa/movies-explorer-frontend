@@ -50,20 +50,22 @@ function Login({ regexpEmail, handleLogin }) {
       handleAuth={handleLogin}
       >
 
-      <h2 className="auth__subtitle auth__subtitle_type_email">E-mail</h2>
+      <label className="auth__subtitle auth__subtitle_type_email">E-mail</label>
       <input
         id="auth__email"
         className={`auth__input auth__input_type_email ${emailValid ? '' : 'auth__input_error'}`}
         type="email"
+        placeholder="E-mail"
         ref={email}
         onChange={(e) => { handleChangeEmail(e) }}
         required />
       <span className={`auth__error-message auth__error-message_type_email ${emailValid ? '' : 'auth__error-message_active'}`}>Что-то пошло не так...</span>
 
-      <h2 className="auth__subtitle auth__subtitle_type_password">Пароль</h2>
+      <label className="auth__subtitle auth__subtitle_type_password">Пароль</label>
       <input
         id="auth__password"
         className={`auth__input auth__input_type_password ${passwordValid ? '' : 'auth__input_error'}`}
+        placeholder="Пароль"
         ref={password}
         onChange={(e) => { handleChangePassword(e) }}
         type="password"

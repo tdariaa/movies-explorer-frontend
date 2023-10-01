@@ -6,8 +6,8 @@ function Portfolio() {
 
   return (
     <>
-      <h2 className="student_subtitle">Портфолио</h2>
-      <ul className="student_portfolio">
+      <h2 className="student__subtitle">Портфолио</h2>
+      <ul className="student__portfolio">
         <li className="student__item">
           <Link className="student__link" to="https://github.com/tdariaa/how-to-learn" target="_blank">
             <p className="student__text">Статичный сайт</p>

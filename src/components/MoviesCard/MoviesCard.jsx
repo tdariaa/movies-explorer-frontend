@@ -13,7 +13,7 @@ function MoviesCard(props) {
 
   return (
 
-    <div className="cards__item">
+    <li className="cards__item">
       <Link className="cards__link" to={props.trailerLink}  target="_blank">
         <img className="cards__images" src={`https://api.nomoreparties.co${props.image.url}`} alt={props.image.name} />
 
@@ -24,10 +24,10 @@ function MoviesCard(props) {
       </Link>
       {
         props.isMovieSaved ?
-          <button className="cards__status card__status_type_delete" /> :
-          <button className={`cards__status ${isSaved ? "card__status_type_saved" : "cards__status_type_save"}`} onClick={savedButton} >{isSaved ? "" : "Сохранить"}</button>
+          <button className="cards__status cards__status_type_delete" type="button" /> :
+          <button className={`cards__status ${isSaved ? "cards__status_type_saved" : "cards__status_type_save"}`} onClick={savedButton} type="button" >{isSaved ? "" : "Сохранить"}</button>
       }
-    </div>
+    </li>
 
 
   );

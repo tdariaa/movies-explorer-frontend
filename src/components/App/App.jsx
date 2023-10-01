@@ -80,6 +80,7 @@ function App() {
             />
             <Profile
               handleLogout={handleLogout}
+              regexpEmail={regexpEmail}
             />
           </>
         } />

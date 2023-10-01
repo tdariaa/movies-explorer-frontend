@@ -19,15 +19,15 @@ function MoviesCardList({ cards, isMovieSaved }) {
 
   return (
     <>
-      <section className="cards">
+      <ul className="cards">
         {visibleCards.map((props) => {
           return <MoviesCard key={props.id} {...props} isMovieSaved={isMovieSaved} />
         }
         )}
-      </section>
+      </ul>
 
       <section className="more">
-        <button className="more__button" onClick={showMore}>Ещё</button>
+        <button className="more__button" onClick={showMore} type="button" >Ещё</button>
       </section>
 
     </>
