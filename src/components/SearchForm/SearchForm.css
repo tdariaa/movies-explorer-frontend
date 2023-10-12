@@ -61,6 +61,17 @@
   cursor: pointer;
 }
 
+.search__button_disabled {
+  padding: 0;
+  border: 0;
+  height: 44px;
+  max-width: 44px;
+  width: 100%;
+  background-image: url(../../images/finddisabled.svg);
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .search__button:hover {
   opacity: 0.8;
 }

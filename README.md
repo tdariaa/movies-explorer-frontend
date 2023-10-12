@@ -2,6 +2,9 @@
 Название выбранного макета: dark-2
 Ссылка на макет: https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/Дипломный-проект?type=design&node-id=1-7266&mode=design&t=gQ1YVTi6y9GmMHsI-0
 
+# movies-explorer-api
+https://api.tdariaamovie.nomoredomainsicu.ru
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
