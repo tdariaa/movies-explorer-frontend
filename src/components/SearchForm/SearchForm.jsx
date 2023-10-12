@@ -5,7 +5,7 @@ import { useFormWithValidation } from '../../hooks/useFormWithValidation.jsx';
 
 function SearchForm({ handleCheck, handleSubmit, isMovieSaved, isChecked }) {
 
-  const { values, handleChange, errors, isValidInput, isValid, resetForm } = useFormWithValidation();
+  const { values, handleChange, isValid, resetForm } = useFormWithValidation();
 
   function submitForm(e) {
     e.preventDefault();

@@ -111,8 +111,6 @@ export const patchProfileData = ({ name, email }) => {
 
 // добавить карточку (POST)
 export const saveMovie = (movieData) => {
-  console.log(movieData);
-  
   return fetch(`${BASE_URL}/movies`, {
     method: 'POST',
     credentials: 'include',

@@ -6,7 +6,7 @@ import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 function Profile({ handleLogout, handleUpdateProfile, errorMessage, resetError, updateProfile, isProfileUpdate, isUpdated }) {
 
-  const { values, handleChange, errors, isValidInput, isValid, resetForm } = useFormWithValidation();
+  const { values, handleChange, isValidInput, isValid, resetForm } = useFormWithValidation();
   const currentUser = React.useContext(CurrentUserContext);
 
   function handleSubmit() {

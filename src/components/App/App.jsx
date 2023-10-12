@@ -140,7 +140,6 @@ function App() {
     mainApi.saveMovie(movieData)
       .then((value) => {
         setSavedCards([value, ...savedCards]);
-        console.log(value);
       })
       .catch(function (value) {
         console.log('Ошибка:' + value);
@@ -150,7 +149,6 @@ function App() {
   function handleMovieDelete(movieId) {
     mainApi.deleteMovie(movieId)
       .then((value) => {
-        console.log(value);
         setSavedCards(savedCards.filter((card) => card._id !== movieId));
       })
       .catch(function (value) {
