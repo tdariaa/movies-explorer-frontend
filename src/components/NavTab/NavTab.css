@@ -54,6 +54,7 @@
 .hero__link {
   text-decoration: none;
   color: #FFFFFF;
+  padding: 10px 17px;
 }
 
 .hero__link:hover {

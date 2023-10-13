@@ -8,7 +8,7 @@ import { useResize } from '../../hooks/useResize.jsx';
 import * as moviesApi from '../../utils/MoviesApi';
 
 
-function Movies({ cards, savedCards, handleMovieLike, handleMovieDelete }) {
+function Movies({ savedCards, handleMovieLike, handleMovieDelete }) {
 
   const [loader, setLoader] = React.useState(false);
   const [loadError, setLoadError] = React.useState(false);
@@ -26,7 +26,7 @@ function Movies({ cards, savedCards, handleMovieLike, handleMovieDelete }) {
     if (localStorage.getItem('check') === 'true') {
       setIsChecked(true);
     }
-  }, [cards]);
+  }, []);
 
   function filtred(cards, inputValue) {
     setResultShortMovie(cards.filter((item) =>
@@ -45,18 +45,24 @@ function Movies({ cards, savedCards, handleMovieLike, handleMovieDelete }) {
     setIsSearch(true);
     localStorage.setItem('value', inputValue);
     setLoader(true);
-    moviesApi.getInitialCards()
-      .then(function (cards) {
-        filtred(cards, inputValue);
-        setLoadError(false);
-      })
-      .catch(function (value) {
-        console.log('Ошибка:' + value);
-        setLoadError(true);
-      })
-      .finally(function (value) {
-        setLoader(false);
-      })
+    if (!localStorage.getItem('cards')) {
+      moviesApi.getInitialCards()
+        .then(function (cards) {
+          filtred(cards, inputValue);
+          setLoadError(false);
+          localStorage.setItem('cards', JSON.stringify(cards));
+        })
+        .catch(function (value) {
+          console.log('Ошибка:' + value);
+          setLoadError(true);
+        })
+        .finally(function (value) {
+          setLoader(false);
+        })
+    } else {
+      setLoader(false);
+      filtred(JSON.parse(localStorage.getItem('cards')), inputValue);
+    }
   }
 
   React.useEffect(() => {

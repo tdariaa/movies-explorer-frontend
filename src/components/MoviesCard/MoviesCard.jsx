@@ -9,6 +9,8 @@ function MoviesCard(props) {
   const [isSaveActive, setIsSaveActive] = React.useState(false);
   const [cardId, setCardId] = React.useState({});
 
+  const quotient = Math.floor(props.duration/ 60); // целое число часов
+  const remainder = props.duration % 60; // остаток от целого (кол-во минут)
 
   React.useEffect(() => {
     if (!props.isMovieSaved) {
@@ -38,6 +40,7 @@ function MoviesCard(props) {
 
   function deleteButton(e) {
     e.preventDefault();
+    console.log("hop", props.isMovieSaved, cardId._id);
     if (props.isMovieSaved) {
       props.handleMovieDelete(props._id)
     } else {
@@ -53,7 +56,7 @@ function MoviesCard(props) {
 
         <div className="cards__description">
           <h2 className="cards__title">{props.nameRU}</h2>
-          <p className="cards__duration">{props.duration}</p>
+          <p className="cards__duration">{quotient === 0? `${remainder} м` : remainder === 0? `${quotient} ч` : `${quotient} ч ${remainder} м`}</p>
         </div>
       </Link>
       {

@@ -13,6 +13,7 @@ function SavedMovies({ savedCards, handleMovieDelete, loader }) {
   const [resultLongMovie, setResultLongMovie] = React.useState([]);
 
   React.useEffect(() => {
+    console.log(savedCards);
     setResultShortMovie(savedCards.filter((item) => item.duration < 40));
   }, [savedCards]);
 

@@ -35,6 +35,18 @@
   }
 }
 
+@media screen and (min-width: 1715px) {
+  .cards {
+    width: calc((1142/1280)*100%);
+  }
+}
+
+@media (min-width: 1275px) and (max-width: 1280px) {
+  .cards {
+    width: calc((1145/1280)*100%);
+  }
+}
+
 .more {
   width: calc((320/1280)*100%);
   padding: 50px 0 80px;
@@ -60,6 +72,12 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  cursor: pointer;
+}
+
+.more__button:hover {
+  border: 1px solid rgb(66, 66, 66, 0.7);
+  color: rgb(255, 255, 255, 0.7);
 }
 
 @media screen and (max-width: 768px) {

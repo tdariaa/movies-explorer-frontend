@@ -12,7 +12,8 @@ function MoviesCardList({ cards, isMovieSaved, handleMovieLike, handleMovieDelet
             isMovieSaved={isMovieSaved}
             handleMovieLike={handleMovieLike}
             handleMovieDelete={handleMovieDelete}
-            savedCards={savedCards} />
+            savedCards={savedCards}
+            />
         }
         )}
       </ul>

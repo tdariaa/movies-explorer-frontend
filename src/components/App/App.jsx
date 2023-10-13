@@ -27,7 +27,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]);
+  // const [cards, setCards] = React.useState([]);
   const [savedCards, setSavedCards] = React.useState([]);
   const [isProfileUpdate, setIsProfileUpdate] = React.useState(false);
   const [isTokenCheck, setIsTokenCheck] = React.useState(true);
@@ -47,6 +47,7 @@ function App() {
           localStorage.removeItem('jwt');
           localStorage.removeItem('check');
           localStorage.removeItem('value');
+          localStorage.removeItem('cards');
           setLoggedIn(false);
           console.log('Ошибка:' + value);
         })
@@ -66,10 +67,11 @@ function App() {
   React.useEffect(() => {
     setLoader(true);
     if (loggedIn) {
-      Promise.all([moviesApi.getInitialCards(), mainApi.getSavedMovies(), mainApi.getProfileData()])
+      Promise.all([mainApi.getSavedMovies(), mainApi.getProfileData()])
         .then(function (value) {
-          const [movieCards, savedMovieCards, profileInfo] = value;
-          setCards(movieCards);
+          const [savedMovieCards, profileInfo] = value;
+          // setCards(movieCards);
+          console.log(savedMovieCards);
           setSavedCards(savedMovieCards);
           setCurrentUser(profileInfo);
           setLoadError(false);
@@ -89,7 +91,7 @@ function App() {
     console.log(name, email, password)
     mainApi.register(name, email, password)
       .then((data) => {
-        handleAuthorize({ email, password }, "register");
+        handleAuthorize({ email, password });
       })
       .catch(function (value) {
         setErrorMessage(true);
@@ -97,18 +99,14 @@ function App() {
       })
   }
 
-  function handleAuthorize(data, from) {
+  function handleAuthorize(data) {
     const { email, password } = data;
     mainApi.authorize(email, password)
       .then((data) => {
         localStorage.setItem('jwt', data.token);
         setErrorMessage(false);
         setLoggedIn(true);
-        if (from === "signup") {
-          navigate('/movies');
-        } else {
-          navigate('/profile');
-        }
+        navigate('/movies');
       })
       .catch(function (value) {
         setErrorMessage(true);
@@ -161,6 +159,7 @@ function App() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('check');
     localStorage.removeItem('value');
+    localStorage.removeItem('cards');
     setLoggedIn(false);
     navigate('/');
   }
@@ -189,12 +188,14 @@ function App() {
               handleRegister={handleRegister}
               errorMessage={errorMessage}
               resetError={resetError}
+              loggedIn={loggedIn}
             />} />
 
             <Route path="/signin" element={<Login
               handleAuthorize={handleAuthorize}
               errorMessage={errorMessage}
               resetError={resetError}
+              loggedIn={loggedIn}
             />} />
 
             <Route path="/" element={
@@ -209,7 +210,6 @@ function App() {
               <>
                 {loggedIn && <Header isLoggedIn={loggedIn} />}
                 <ProtectedRouteElement element={Movies} loggedIn={loggedIn}
-                  cards={cards}
                   savedCards={savedCards}
                   handleMovieLike={handleMovieLike}
                   handleMovieDelete={handleMovieDelete}
@@ -225,7 +225,8 @@ function App() {
                 <ProtectedRouteElement element={SavedMovies} loggedIn={loggedIn}
                   savedCards={savedCards}
                   handleMovieDelete={handleMovieDelete}
-                  loader={loader} />
+                  loader={loader}
+                />
                 {loggedIn && <Footer />}
               </>
             } />
@@ -240,7 +241,8 @@ function App() {
                   resetError={resetError}
                   updateProfile={updateProfile}
                   isProfileUpdate={isProfileUpdate}
-                  isUpdated={isUpdated} />
+                  isUpdated={isUpdated}
+                />
               </>
             } />
 

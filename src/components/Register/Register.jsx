@@ -2,14 +2,22 @@ import React from 'react';
 import Authentication from '../Authentication/Authentication.jsx';
 
 import { useFormWithValidation } from '../../hooks/useFormWithValidation.jsx';
+import { useNavigate } from "react-router-dom";
 
-function Register({ handleRegister, errorMessage, resetError }) {
+function Register({ handleRegister, errorMessage, resetError, loggedIn }) {
 
+  const navigate = useNavigate();
   const { values, handleChange, errors, isValidInput, isValid, resetForm } = useFormWithValidation();
 
   function handleSubmit() {
     handleRegister(values);
   }
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      navigate('/movies');
+    }
+  }, [])
 
   React.useEffect(() => {
     resetError();
