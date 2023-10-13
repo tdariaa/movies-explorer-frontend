@@ -7,7 +7,7 @@ import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute.jsx';
 import { CurrentUserContext } from '../../context/CurrentUserContext.js';
 
 import * as mainApi from '../../utils/MainApi.js';
-import * as moviesApi from '../../utils/MoviesApi';
+// import * as moviesApi from '../../utils/MoviesApi';
 
 import Main from '../Main/Main.jsx';
 import Footer from '../Footer/Footer.jsx';
@@ -27,13 +27,13 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  // const [cards, setCards] = React.useState([]);
   const [savedCards, setSavedCards] = React.useState([]);
   const [isProfileUpdate, setIsProfileUpdate] = React.useState(false);
   const [isTokenCheck, setIsTokenCheck] = React.useState(true);
   const [loader, setLoader] = React.useState(true);
   const [loadError, setLoadError] = React.useState(false);
   const [isUpdated, setIsUpdated] = React.useState(false);
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
 
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
@@ -70,8 +70,6 @@ function App() {
       Promise.all([mainApi.getSavedMovies(), mainApi.getProfileData()])
         .then(function (value) {
           const [savedMovieCards, profileInfo] = value;
-          // setCards(movieCards);
-          console.log(savedMovieCards);
           setSavedCards(savedMovieCards);
           setCurrentUser(profileInfo);
           setLoadError(false);
@@ -87,8 +85,8 @@ function App() {
   }, [loggedIn])
 
   function handleRegister(data) {
+    setButtonDisabled(true);
     const { name, email, password } = data;
-    console.log(name, email, password)
     mainApi.register(name, email, password)
       .then((data) => {
         handleAuthorize({ email, password });
@@ -97,9 +95,13 @@ function App() {
         setErrorMessage(true);
         console.log(value);
       })
+      .finally(function (value) {
+        setButtonDisabled(false);
+      })
   }
 
   function handleAuthorize(data) {
+    setButtonDisabled(true);
     const { email, password } = data;
     mainApi.authorize(email, password)
       .then((data) => {
@@ -112,10 +114,14 @@ function App() {
         setErrorMessage(true);
         console.log(value);
       })
+      .finally(function (value) {
+        setButtonDisabled(false);
+      })
   }
 
   function handleUpdateProfile({ name, email }) {
     setIsUpdated(true);
+    setButtonDisabled(true);
     if (loggedIn) {
       mainApi.patchProfileData({ name, email })
         .then((profileInfo) => {
@@ -130,6 +136,7 @@ function App() {
         })
         .finally(function (value) {
           setIsUpdated(false);
+          setButtonDisabled(false);
         })
     }
   }
@@ -189,6 +196,7 @@ function App() {
               errorMessage={errorMessage}
               resetError={resetError}
               loggedIn={loggedIn}
+              buttonDisabled={buttonDisabled}
             />} />
 
             <Route path="/signin" element={<Login
@@ -196,6 +204,7 @@ function App() {
               errorMessage={errorMessage}
               resetError={resetError}
               loggedIn={loggedIn}
+              buttonDisabled={buttonDisabled}
             />} />
 
             <Route path="/" element={
@@ -242,6 +251,7 @@ function App() {
                   updateProfile={updateProfile}
                   isProfileUpdate={isProfileUpdate}
                   isUpdated={isUpdated}
+                  buttonDisabled={buttonDisabled}
                 />
               </>
             } />

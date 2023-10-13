@@ -1,31 +1,46 @@
 import React from 'react';
-// import { useState, useEffect } from 'react';
+
+import {
+  WINDOW_BIG_DESKTOP,
+  WINDOW_DESKTOP,
+  WINDOW_TABLETS,
+  WINDOW_MOBILE,
+  NUMBER_BIG_DESKTOP, 
+  NUMBER_DESKTOP, 
+  NUMBER_TABLETS, 
+  NUMBER_MOBILE,
+  PLUS_BIG_DESKTOP, 
+  PLUS_DESKTOP, 
+  PLUS_TABLETS, 
+  PLUS_MOBILE
+} from '../utils/constants.js'
 
 export function useResize() {
   const [cardInfo, setCardInfo] = React.useState({});
 
   React.useEffect(() => {
-    setCardInfo((window.innerWidth >= 1715) ?
-      { number: 12, plus: 4 } :
-      (window.innerWidth >= 1275) ?
-        { number: 12, plus: 3 } :
-        (window.innerWidth >= 768) ?
-          { number: 8, plus: 2 } :
-          (window.innerWidth >= 320) ?
-            { number: 5, plus: 2 } :
-            { number: 5, plus: 2 });
+    setCardInfo(
+      (window.innerWidth >= WINDOW_BIG_DESKTOP) ?
+        { number: NUMBER_BIG_DESKTOP, plus: PLUS_BIG_DESKTOP } :
+        (window.innerWidth >= WINDOW_DESKTOP) ?
+          { number: NUMBER_DESKTOP, plus: PLUS_DESKTOP } :
+          (window.innerWidth >= WINDOW_TABLETS) ?
+            { number: NUMBER_TABLETS, plus: PLUS_TABLETS } :
+            (window.innerWidth >= WINDOW_MOBILE) ?
+              { number: NUMBER_MOBILE, plus: PLUS_MOBILE } :
+              { number: NUMBER_MOBILE, plus: PLUS_MOBILE });
 
     const handleResize = (event) => {
       setCardInfo(
-        (event.target.innerWidth >= 1715) ?
-          { number: 12, plus: 4 } :
-          (event.target.innerWidth >= 1275) ?
-            { number: 12, plus: 3 } :
-            (event.target.innerWidth >= 768) ?
-              { number: 8, plus: 2 } :
-              (event.target.innerWidth >= 320) ?
-                { number: 5, plus: 2 } :
-                { number: 5, plus: 2 })
+        (event.target.innerWidth >= WINDOW_BIG_DESKTOP) ?
+          { number: NUMBER_BIG_DESKTOP, plus: PLUS_BIG_DESKTOP } :
+          (event.target.innerWidth >= WINDOW_DESKTOP) ?
+            { number: NUMBER_DESKTOP, plus: PLUS_DESKTOP } :
+            (event.target.innerWidth >= WINDOW_TABLETS) ?
+              { number: NUMBER_TABLETS, plus: PLUS_TABLETS } :
+              (event.target.innerWidth >= WINDOW_MOBILE) ?
+                { number: NUMBER_MOBILE, plus: PLUS_MOBILE } :
+                { number: NUMBER_MOBILE, plus: PLUS_MOBILE })
     };
     window.addEventListener('resize', handleResize);
     return () => {

@@ -18,7 +18,7 @@ function MoviesCardList({ cards, isMovieSaved, handleMovieLike, handleMovieDelet
         )}
       </ul>
 
-      {isMovieSaved ? "" : (cardsLength === cards.length) ? "" :
+      {isMovieSaved ? "" : (cardsLength <= cards.length) ? "" :
         <section className="more">
           <button className="more__button" onClick={(e) => loadMore(e)} type="button" >Ещё</button>
         </section>

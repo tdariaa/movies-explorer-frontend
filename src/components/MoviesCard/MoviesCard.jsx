@@ -21,7 +21,6 @@ function MoviesCard(props) {
 
   function savedButton(e) {
     e.preventDefault();
-    setIsSaveActive(!isSaveActive);
     props.handleMovieLike(
       {
         country: props.country,
@@ -40,12 +39,7 @@ function MoviesCard(props) {
 
   function deleteButton(e) {
     e.preventDefault();
-    console.log("hop", props.isMovieSaved, cardId._id);
-    if (props.isMovieSaved) {
-      props.handleMovieDelete(props._id)
-    } else {
-      props.handleMovieDelete(cardId._id)
-    }
+    props.handleMovieDelete(props._id || cardId._id);
   }
 
   return (
@@ -56,7 +50,7 @@ function MoviesCard(props) {
 
         <div className="cards__description">
           <h2 className="cards__title">{props.nameRU}</h2>
-          <p className="cards__duration">{quotient === 0? `${remainder} м` : remainder === 0? `${quotient} ч` : `${quotient} ч ${remainder} м`}</p>
+          <p className="cards__duration">{quotient === 0 ? `${remainder}м` : remainder === 0 ? `${quotient}ч` : `${quotient} ч ${remainder} м`}</p>
         </div>
       </Link>
       {

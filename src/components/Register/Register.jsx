@@ -4,7 +4,7 @@ import Authentication from '../Authentication/Authentication.jsx';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation.jsx';
 import { useNavigate } from "react-router-dom";
 
-function Register({ handleRegister, errorMessage, resetError, loggedIn }) {
+function Register({ handleRegister, errorMessage, resetError, loggedIn, buttonDisabled }) {
 
   const navigate = useNavigate();
   const { values, handleChange, errors, isValidInput, isValid, resetForm } = useFormWithValidation();
@@ -34,6 +34,7 @@ function Register({ handleRegister, errorMessage, resetError, loggedIn }) {
       link="/signin"
       handleAuth={handleSubmit}
       errorMessage={errorMessage}
+      buttonDisabled={buttonDisabled}
     >
 
       <label className="auth__subtitle auth__subtitle_type_name">Имя</label>

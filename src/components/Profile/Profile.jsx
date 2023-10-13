@@ -4,7 +4,7 @@ import './Profile.css'
 import { CurrentUserContext } from '../../context/CurrentUserContext.js';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
-function Profile({ handleLogout, handleUpdateProfile, errorMessage, resetError, updateProfile, isProfileUpdate, isUpdated }) {
+function Profile({ handleLogout, handleUpdateProfile, errorMessage, resetError, updateProfile, isProfileUpdate, isUpdated, buttonDisabled }) {
 
   const { values, handleChange, isValidInput, isValid, resetForm } = useFormWithValidation();
   const currentUser = React.useContext(CurrentUserContext);
@@ -59,7 +59,9 @@ function Profile({ handleLogout, handleUpdateProfile, errorMessage, resetError, 
           {isProfileUpdate &&
             <>
               <span className="profile__error-message profile__error-message_active">{isUpdated ? !errorMessage && "Обновление профиля прошло успешно." : errorMessage && "При обновлении профиля произошла ошибка."}</span>
-              <button className={`profile__button profile__button_type_save ${!(!isValid || errorMessage || (values.name === currentUser.name && values.email === currentUser.email)) ? "" : "profile__button_error"}`} type="submit" disabled={!isValid || errorMessage || (values.name === currentUser.name && values.email === currentUser.email)}>Сохранить</button>
+              <button className={`profile__button profile__button_type_save ${!(!isValid || errorMessage || buttonDisabled || (values.name === currentUser.name && values.email === currentUser.email)) ? "" : "profile__button_error"}`} 
+              type="submit" 
+              disabled={!isValid || errorMessage || buttonDisabled || (values.name === currentUser.name && values.email === currentUser.email)}>Сохранить</button>
             </>
           }
         </form>

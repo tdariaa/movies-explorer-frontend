@@ -4,7 +4,7 @@ import Authentication from '../Authentication/Authentication.jsx';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation.jsx';
 import { useNavigate } from "react-router-dom";
 
-function Login({ handleAuthorize, errorMessage, resetError, loggedIn }) {
+function Login({ handleAuthorize, errorMessage, resetError, loggedIn, buttonDisabled }) {
 
   const navigate = useNavigate();
   const { values, handleChange, errors, isValidInput, isValid, resetForm } = useFormWithValidation();
@@ -35,6 +35,7 @@ function Login({ handleAuthorize, errorMessage, resetError, loggedIn }) {
       link="/signup"
       handleAuth={handleSubmit}
       errorMessage={errorMessage}
+      buttonDisabled={buttonDisabled}
     >
 
       <label className="auth__subtitle auth__subtitle_type_email">E-mail</label>

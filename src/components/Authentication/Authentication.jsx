@@ -14,7 +14,9 @@ function Authentication(props) {
             {props.children}
           </div>
           <span className="auth__error">{props.errorMessage && "Произошла ошибка."}</span>
-          <button className={`auth__button ${!(!props.isValid || props.errorMessage) ? "" : "auth__button_disabled"}`} disabled={!props.isValid || props.errorMessage} type="submit">{props.buttonTitle}</button>
+          <button className={`auth__button ${!(!props.isValid || props.errorMessage || props.buttonDisabled) ? "" : "auth__button_disabled"}`}
+            disabled={!props.isValid || props.errorMessage || props.buttonDisabled}
+            type="submit">{props.buttonTitle}</button>
         </form>
 
         <p className="auth__text">{props.text} <Link className="auth__link" to={props.link}>{props.linkText}</Link></p>
