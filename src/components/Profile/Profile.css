@@ -133,6 +133,10 @@
   opacity: 1;
 }
 
+.profile__error-message_success {
+  color: #3b8c47;
+}
+
 .profile__button_error {
   background: #F8F8F8;
   color: #C2C2C2;

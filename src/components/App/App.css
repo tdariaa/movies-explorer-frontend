@@ -12,6 +12,7 @@
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   display: flex;
   flex-direction: column;
+  /* justify-content: space-evenly; */
   box-sizing: border-box;
   align-items: center;
   position: relative;

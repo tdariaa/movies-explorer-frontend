@@ -1,75 +1,71 @@
 import React from 'react';
 import './Profile.css'
 
-function Profile({ handleLogout, regexpEmail }) {
+import { CurrentUserContext } from '../../context/CurrentUserContext.js';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
-  const [isProfileUpdate, setIsProfileUpdate] = React.useState(false);
-  const name = React.useRef();
-  const email = React.useRef();
-  const [nameValid, setNameValid] = React.useState(true);
-  const [emailValid, setEmailValid] = React.useState(true);
-  const [isDisabled, setIsDisabled] = React.useState(true);
+function Profile({ handleLogout, handleUpdateProfile, errorMessage, resetError, updateProfile, isProfileUpdate, isUpdated, buttonDisabled }) {
 
+  const { values, handleChange, isValidInput, isValid, resetForm } = useFormWithValidation();
+  const currentUser = React.useContext(CurrentUserContext);
 
   function handleSubmit() {
-    setIsProfileUpdate(!isProfileUpdate)
+    if (!errorMessage) {
+      handleUpdateProfile({ name: values.name || currentUser.name, email: values.email || currentUser.email });
+      resetForm();
+    }
   }
 
   React.useEffect(() => {
-    if ((emailValid && nameValid)) {
-      setIsDisabled(false);
-    }
-    else {
-      setIsDisabled(true);
-    }
-  }, [email, name, emailValid, nameValid]);
-
-  function handleChangeEmail(e) {
-    e.preventDefault();
-    if (!regexpEmail.test(String(email.current.value).toLowerCase())) {
-      setEmailValid(false);
-    }
-    else {
-      setEmailValid(true);
-    }
-  }
-
-  function handleChangeName(e) {
-    e.preventDefault();
-    if (name.current.value.length < 3 || name.current.value.length > 30) {
-      setNameValid(false);
-    }
-    else {
-      setNameValid(true);
-    }
-  }
+    resetError();
+    //eslint-disable-next-line
+  }, [values])
 
   return (
     <main className="profile">
       <section className="profile__section">
-        <h1 className="profile__title">Привет, Виталий!</h1>
+        <h1 className="profile__title">{`Привет, ${currentUser.name}`}</h1>
         <form action="" className="profile__form" onSubmit={(e) => { e.preventDefault(); handleSubmit() }}>
           <div className="profile__info">
             <label className="profile__subtitle">Имя</label>
-            {isProfileUpdate ?
-              <input className={`profile__text profile__text_input ${nameValid ? "" : "profile__text_error"}`} ref={name} onChange={(e) => { handleChangeName(e) }} type="text" placeholder="Имя" defaultValue={""} disabled={!isProfileUpdate} /> :
-              <input className="profile__text profile__text_input" type="text" placeholder="Имя" defaultValue={"Виталий"} disabled={!isProfileUpdate} />
-            }
+            <input
+              id="profile__name"
+              name="name"
+              className={`profile__text profile__text_input ${isValidInput.name === undefined || isValidInput.name ? "" : "profile__text_error"}`}
+              placeholder="Имя"
+              type="text"
+              defaultValue={currentUser.name}
+              minLength={3}
+              maxLength={30}
+              pattern="^[А-Яа-яЁёa-zA-Z\-\s]+$"
+              onChange={handleChange}
+              disabled={!isProfileUpdate}
+            />
           </div>
           <div className="profile__info">
             <label className="profile__subtitle">E-mail</label>
-            {isProfileUpdate ?
-              <input className={`profile__text profile__text_input ${emailValid ? "" : "profile__text_error"}`} ref={email} onChange={(e) => { handleChangeEmail(e) }} type="email" placeholder="E-mail" defaultValue={""} disabled={!isProfileUpdate} /> :
-              <input className="profile__text profile__text_input" type="email" placeholder="E-mail" defaultValue={"pochta@yandex.ru"} disabled={!isProfileUpdate} />}
+            <input
+              id="profile__email"
+              name="email"
+              className={`profile__text profile__text_input ${isValidInput.email === undefined || isValidInput.email ? "" : "profile__text_error"}`}
+              placeholder="E-mail"
+              type="email"
+              defaultValue={currentUser.email}
+              pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+              onChange={handleChange}
+              disabled={!isProfileUpdate}
+            />
           </div>
-          {isProfileUpdate ?
+          {isProfileUpdate &&
             <>
-              <span className={`profile__error-message ${isDisabled ? "profile__error-message_active" : ""}`}>При обновлении профиля произошла ошибка.</span>
-              <button className={`profile__button profile__button_type_save ${isDisabled ? "profile__button_error" : ""}`}  type="submit" disabled={isDisabled}>Сохранить</button>
-            </> :
-            <button className="profile__button profile__button_type_settings" type="submit" >Редактировать</button>
+              <span className={`profile__error-message profile__error-message_active ${isUpdated && !errorMessage ? "profile__error-message_success" : ""}`}>{isUpdated ? !errorMessage && "Обновление профиля прошло успешно." : errorMessage && "При обновлении профиля произошла ошибка."}</span>
+              <button className={`profile__button profile__button_type_save ${!(!isValid || errorMessage || buttonDisabled || (values.name === currentUser.name && values.email === currentUser.email)) ? "" : "profile__button_error"}`} 
+              type="submit" 
+              disabled={!isValid || errorMessage || buttonDisabled || (values.name === currentUser.name && values.email === currentUser.email)}>Сохранить</button>
+            </>
           }
         </form>
+        {!isProfileUpdate && <button className="profile__button profile__button_type_settings" type="submit" onClick={(e) => { e.preventDefault(); updateProfile(); }}>Редактировать</button>}
         {!isProfileUpdate && <button className="profile__button profile__button_type_signout" onClick={handleLogout} type="button">Выйти из аккаунта</button>}
       </section>
     </main>
