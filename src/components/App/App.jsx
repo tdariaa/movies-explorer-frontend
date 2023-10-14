@@ -120,22 +120,19 @@ function App() {
   }
 
   function handleUpdateProfile({ name, email }) {
-    setIsUpdated(true);
     setButtonDisabled(true);
     if (loggedIn) {
       mainApi.patchProfileData({ name, email })
         .then((profileInfo) => {
-          setCurrentUser(profileInfo);
-          updateProfile();
           setIsUpdated(true);
+          setCurrentUser(profileInfo);
+          setTimeout(updateProfile, 1000);
         })
         .catch(function (value) {
-          setIsUpdated(false);
           setErrorMessage(true);
           console.log(value);
         })
         .finally(function (value) {
-          setIsUpdated(false);
           setButtonDisabled(false);
         })
     }
@@ -181,6 +178,7 @@ function App() {
   }
 
   function updateProfile() {
+    setIsUpdated(false);
     setIsProfileUpdate(!isProfileUpdate);
   }
 

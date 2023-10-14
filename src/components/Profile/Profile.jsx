@@ -58,7 +58,7 @@ function Profile({ handleLogout, handleUpdateProfile, errorMessage, resetError, 
           </div>
           {isProfileUpdate &&
             <>
-              <span className="profile__error-message profile__error-message_active">{isUpdated ? !errorMessage && "Обновление профиля прошло успешно." : errorMessage && "При обновлении профиля произошла ошибка."}</span>
+              <span className={`profile__error-message profile__error-message_active ${isUpdated && !errorMessage ? "profile__error-message_success" : ""}`}>{isUpdated ? !errorMessage && "Обновление профиля прошло успешно." : errorMessage && "При обновлении профиля произошла ошибка."}</span>
               <button className={`profile__button profile__button_type_save ${!(!isValid || errorMessage || buttonDisabled || (values.name === currentUser.name && values.email === currentUser.email)) ? "" : "profile__button_error"}`} 
               type="submit" 
               disabled={!isValid || errorMessage || buttonDisabled || (values.name === currentUser.name && values.email === currentUser.email)}>Сохранить</button>

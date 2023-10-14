@@ -57,7 +57,7 @@ function MoviesCard(props) {
         props.isMovieSaved ?
           <button className="cards__status cards__status_type_delete" onClick={deleteButton} type="button" /> :
           isSaveActive ?
-            <button className="cards__status cards__status_type_saved" onClick={(e) => { deleteButton(e); setIsSaveActive(!isSaveActive) }} type="button" ></button> :
+            <button className="cards__status cards__status_type_saved" onClick={deleteButton} type="button" ></button> :
             <button className="cards__status cards__status_type_save" onClick={savedButton} type="button" >Сохранить</button>
       }
     </li>
